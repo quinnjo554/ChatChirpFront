@@ -6,7 +6,7 @@ const theme = extendTheme({
     body: `'Poppins', sans-serif`,  
   },
   shadows: {
-    blue: "0 16px 24px 0 rgba(0, 0, 255, 0.4), 0 4px 6px 6px rgba(0, 0, 255, 0.2)",
+    blue: "0 16px 24px 0 rgba(0, 132, 255, 0.4), 0 4px 6px 10px rgba(0, 132, 255, 0.2)",
   }
 })
 export default theme;

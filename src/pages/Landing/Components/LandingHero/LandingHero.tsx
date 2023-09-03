@@ -1,8 +1,9 @@
+"use client";
 import { Box, Center, Image, Text, Flex } from "@chakra-ui/react";
 import landingImg from "../../../../../public/ameer-basheer-gV6taBJuBTk-unsplash.jpg";
 import logo from "../../../../../public/TempLogo.png";
 import React from "react";
-
+import { useSession } from "next-auth/react";
 function LandingHero() {
   return (
     <Box
@@ -34,8 +35,9 @@ function LandingHero() {
             >
               Start Your Free Chat Chirp Account Today!
             </Text>
-            <Text fontSize="2xl" fontWeight={"bold"} color="twitter.300">
-              Chat With Friends, Family and others while promoting kindness
+            <Text fontSize="3xl" fontWeight={"bold"} color="twitter.300">
+              Chat With Friends, Family and others while promoting kindness in
+              your posts
             </Text>
           </Flex>
         </Center>
