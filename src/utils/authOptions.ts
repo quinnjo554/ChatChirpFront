@@ -1,6 +1,9 @@
+import { getUser, useUserEmail } from "@/hooks/auth/getUser";
 import { NextAuthOptions } from "next-auth";
+import bcrypt from 'bcrypt';
 import Credentials from "next-auth/providers/credentials"
 import GoogleProvider from 'next-auth/providers/google'
+import UserResponse from "@/models/User";
 export const authOptions:NextAuthOptions = {
     providers:[
         GoogleProvider({
@@ -10,25 +13,30 @@ export const authOptions:NextAuthOptions = {
         Credentials({
          name: "Credentials",
          credentials:{
-            email: {label: "Email"},
-            password: {label: "Password"}
+            email:{
+                label: "Email:",
+                type: "text",
+                placeholder: "Email",
+
+           },
+           password:{
+            label:"Password:",
+            type:"password",
+           }
          },
          async authorize(credentials, req) {
-            // Add logic here to look up the user from the credentials supplied
-            const user = { id: "1", name: 'J Smith', email: 'jsmith@example.com' }
-          
-            if (credentials?.email == "w") {
-              // Any object returned will be saved in `user` property of the JWT
-              return user
-            } else {
-              // If you return null or false then the credentials will be rejected
-              return null
-              // You can also Reject this callback with an Error or with a URL:
-              // throw new Error('error message') // Redirect to error page
-              // throw '/path/to/redirect'        // Redirect to a URL
-            }
-          },
+               if(!credentials?.email || !credentials.password){
+                return null
+               }
+                const response = await fetch(`http://localhost:8088/User/email/${credentials?.email}`);
+                const user = await response.json();
+                //todo hash password
+                if (response.ok && credentials.password == user.password) {
+                    return user;
+                }
+            return null;
+          }
         })
     ],
-    debug:true
+    secret:process.env.NEXTAUTH_SECRET
 }

@@ -8,9 +8,10 @@ import {
   Heading,
   Input,
   Text,
+  Image,
 } from "@chakra-ui/react";
-import { signIn, getProviders } from "next-auth/react";
-import Link from "next/link";
+import GoogleLogo from "../../../../public/google-logo-9808.png";
+import { signIn } from "next-auth/react";
 function LoginModalInputs() {
   const email = useRef<string>("");
   const password = useRef<string>("");
@@ -19,6 +20,7 @@ function LoginModalInputs() {
   };
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
     password.current = e.target.value;
+    console.log(password.current);
   };
   const onSubmit = async () => {
     const result = await signIn("credentials", {
@@ -52,7 +54,7 @@ function LoginModalInputs() {
           bg="gray.300"
           type="password"
           w="100%"
-          onChange={() => handlePasswordChange}
+          onChange={handlePasswordChange}
           size={"md"}
         />
       </Box>
@@ -82,17 +84,18 @@ function LoginModalInputs() {
         </Box>
         <Center>
           <Button
-            mt={10}
-            rounded={"xl"}
-            size="lg"
+            mt={6}
+            rounded={"full"}
+            size="sm"
+            w={20}
+            h={20}
             color="black"
-            w="40%"
-            variant={"ghost"}
+            variant="ghost"
             onClick={() => {
               signIn("google", { callbackUrl: "/dashboard" });
             }}
           >
-            Sign In with google
+            <Image p={0} m={0} src={GoogleLogo.src} alt="Google" />
           </Button>
         </Center>
       </Box>

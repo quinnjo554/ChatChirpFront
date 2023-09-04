@@ -1,9 +1,8 @@
 "use client";
 import { Box, Center, Image, Text, Flex } from "@chakra-ui/react";
 import landingImg from "../../../../../public/ameer-basheer-gV6taBJuBTk-unsplash.jpg";
-import logo from "../../../../../public/TempLogo.png";
 import React from "react";
-import { useSession } from "next-auth/react";
+import { useUserEmail } from "@/hooks/auth/getUser";
 function LandingHero() {
   return (
     <Box
@@ -20,9 +19,6 @@ function LandingHero() {
         src={landingImg.src}
         alt="Landing Image"
       />
-      <Box position="absolute" top="20px" left="20px">
-        <Image rounded="full" src={logo.src} w={32}></Image>
-      </Box>
       <Box position="absolute" w="60%" bottom="20px" left="200px">
         <Center h="110vh">
           <Flex flexDirection="column" alignItems="start">

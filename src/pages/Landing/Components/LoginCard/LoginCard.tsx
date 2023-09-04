@@ -1,17 +1,14 @@
 "use client";
 import React from "react";
-import { signIn, signOut, useSession } from "next-auth/react";
+import Chirp from "../../../../../public/Chirp.png";
 import {
   Card,
   CardHeader,
   Heading,
   CardBody,
   Box,
-  Button,
-  Divider,
-  AbsoluteCenter,
-  Text,
-  Center,
+  Image,
+  Flex,
 } from "@chakra-ui/react";
 import LoginInputs from "@/components/Inputs/LoginInputs/LoginInputs";
 export default function LoginCard() {
@@ -34,17 +31,20 @@ export default function LoginCard() {
         p={5}
       >
         <CardHeader>
-          <Heading
-            fontWeight={"extrabold"}
-            mt={10}
-            fontSize="6xl"
-            color="black"
-          >
-            Login
-          </Heading>
+          <Flex alignItems="center">
+            <Heading
+              fontWeight={"extrabold"}
+              mt={10}
+              fontSize="6xl"
+              color="black"
+            >
+              Login
+            </Heading>
+            <Image mt={10} src={Chirp.src} w={9} h={9} ml={5} />
+          </Flex>
         </CardHeader>
         <CardBody>
-          <LoginInputs></LoginInputs>
+          <LoginInputs />
         </CardBody>
       </Card>
     </Box>
