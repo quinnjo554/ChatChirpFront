@@ -1,14 +1,17 @@
 "use client";
+import { ReactQueryProvider } from "@/contexts/ReactQueryProvider";
 import LandingPage from "@/pages/Landing/LandingPage";
 import theme from "@/theme/theme";
-import { Box, ChakraBaseProvider } from "@chakra-ui/react";
+import { Box, ChakraBaseProvider, ChakraProvider } from "@chakra-ui/react";
 
 export default function Home() {
   return (
-    <ChakraBaseProvider theme={theme}>
-      <Box>
-        <LandingPage></LandingPage>
-      </Box>
-    </ChakraBaseProvider>
+    <ReactQueryProvider>
+      <ChakraProvider theme={theme}>
+        <Box>
+          <LandingPage></LandingPage>
+        </Box>
+      </ChakraProvider>
+    </ReactQueryProvider>
   );
 }
