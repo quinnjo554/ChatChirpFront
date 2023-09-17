@@ -1,4 +1,4 @@
-type UserResponse = {
+interface UserResponse {
     id: string;
     name: string;
     email: string;
@@ -12,7 +12,7 @@ type UserResponse = {
     friendsCount: number;
     favouritesCount: number;
     statusesCount: number;
-    createdAt: string; // Date type if it's a JavaScript Date string
+    createdAt: string; 
     profileBannerUrl: string;
     profileImageUrlHttps: string;
     defaultProfile: boolean;

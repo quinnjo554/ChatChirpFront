@@ -1,4 +1,5 @@
 "use client";
+import DashboardPage from "@/pages/Dashboard/DashboardPage";
 import LandingPage from "@/pages/Landing/LandingPage";
 import theme from "@/theme/theme";
 import { Box, Button, ChakraBaseProvider } from "@chakra-ui/react";
@@ -9,7 +10,7 @@ export default function Dashboard() {
   console.log({ user });
   return (
     <ChakraBaseProvider theme={theme}>
-      <Link href={"/api/auth/signout?callbackUrl=/"}>signOut</Link>
+      <DashboardPage></DashboardPage>
     </ChakraBaseProvider>
   );
 }
