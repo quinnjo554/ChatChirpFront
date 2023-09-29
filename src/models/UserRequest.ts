@@ -1,5 +1,4 @@
-interface User {
-    id: string;
+interface UserRequest {
     name: string;
     email: string;
     hashedPassword: string;
@@ -11,13 +10,12 @@ interface User {
     followersCount: number;
     friendsCount: number;
     favouritesCount: number;
-    listedCount: number;
+    listedCount:number;
     statusesCount: number;
-    createdAt: string; 
     profileBannerUrl: string;
     profileImageUrlHttps: string;
     defaultProfile: boolean;
     defaultProfileImage: boolean;
-}
+};
 
-export default User;
+export default UserRequest;

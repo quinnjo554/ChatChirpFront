@@ -3,7 +3,7 @@ import { NextAuthOptions } from "next-auth";
 import bcrypt from 'bcrypt';
 import Credentials from "next-auth/providers/credentials"
 import GoogleProvider from 'next-auth/providers/google'
-import UserResponse from "@/models/User";
+import UserRequest from "@/models/UserRequest";
 export const authOptions:NextAuthOptions = {
     providers:[
         GoogleProvider({
@@ -28,10 +28,10 @@ export const authOptions:NextAuthOptions = {
                if(!credentials?.email || !credentials.password){
                 return null
                }
-                const response = await fetch(`http://localhost:8088/User/email/${credentials?.email}`);
+                const response = await fetch(`http://localhost:8088/User/${credentials?.email}`);
                 const user = await response.json();
                 //todo hash password
-                if (response.ok && credentials.password == user.password) {
+                if (response.ok && credentials.password == user.hashedPassword) {
                     return user;
                 }
             return null;
