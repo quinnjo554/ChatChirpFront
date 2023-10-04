@@ -13,11 +13,13 @@ export function useUserEmail(email:string, user: UserRequest) : UseQueryResult<U
     })
 }
 
- export async function getUser(email:string | undefined){
+ export function getUser(email:string | undefined): UseQueryResult<User, unknown>{
+    return useQuery(['User',email], async ()=>{
              const response = await fetch(`http://localhost:8088/User/email/${email}`);
              const user = await response.json();
              return user;
- }
+    })
+}
 
  export async function PostUser(user:UserRequest) {
     const response = await fetch('http://localhost:8088/User/', {

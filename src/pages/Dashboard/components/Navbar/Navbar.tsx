@@ -7,20 +7,18 @@ import {
   DrawerHeader,
   DrawerOverlay,
   Flex,
-  Icon,
   Link,
   List,
   ListIcon,
   ListItem,
   Image,
-  UnorderedList,
   useDisclosure,
 } from "@chakra-ui/react";
 
-import Chirp from "../../../../public/Chirp.png";
+import Chirp from "../../../../../public/Chirp.png";
 import { HamburgerIcon } from "@chakra-ui/icons";
-import { FiLogOut } from "react-icons/fi";
 import React from "react";
+import NavbarList from "./NavbarList";
 
 function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -43,27 +41,7 @@ function Navbar() {
                 />
               </Flex>
             </DrawerHeader>
-            <List p="2">
-              <ListItem mt="3">
-                <Button rounded="full" size="lg" variant="ghost">
-                  <ListIcon />
-                  Profile
-                </Button>
-              </ListItem>
-              <ListItem>
-                <Button
-                  rounded="full"
-                  mt={3}
-                  size="lg"
-                  variant="solid"
-                  as={Link}
-                  href={"/api/auth/signout?callbackUrl=/"}
-                >
-                  <FiLogOut />
-                  Sign Out
-                </Button>
-              </ListItem>
-            </List>
+            <NavbarList></NavbarList>
           </DrawerBody>
         </DrawerContent>
       </Drawer>

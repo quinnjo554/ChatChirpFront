@@ -2,7 +2,6 @@
 import { Box, Center, Image, Text, Flex } from "@chakra-ui/react";
 import landingImg from "../../../../../public/ameer-basheer-gV6taBJuBTk-unsplash.jpg";
 import React from "react";
-import { useUserEmail } from "@/hooks/auth/getUser";
 function LandingHero() {
   return (
     <Box
