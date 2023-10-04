@@ -1,22 +1,26 @@
+
+import { randomUUID } from "crypto";
 function createDefaultUser(name:string, email:string) {
+    //need to keep tract if this is a users first time on the sight.
+    //then promt them with a modal 
     return {
         name: name,
         email: email,
-        points: 100,
-        screenName: "quinn123",
+        points: 0,
+        screenName: email,
         description: "This is my profile",
         protected: false,
-        verified: true,
-        followersCount: 500,
-        friendsCount: 200,
-        listedCount: 50,
-        favouritesCount: 300,
-        statusesCount: 1000,
+        verified: false,
+        followersCount: 0,
+        friendsCount: 0,
+        listedCount: 0,
+        favouritesCount: 0,
+        statusesCount: 0,
         profileBannerUrl: "https://example.com/banner.jpg",
         profileImageUrlHttps: "https://example.com/profile.jpg",
         defaultProfile: false,
         defaultProfileImage: false,
-        hashedPassword: "asddwdasfasfasf"
+        hashedPassword: crypto.randomUUID().toString()
     };
 }
 
