@@ -16,9 +16,17 @@ import {
   FiMoreVertical,
   FiThumbsUp,
 } from "react-icons/fi";
-function Post() {
-  const { name, email, image } = useGlobalContext();
-  const { data: user } = getUser(email);
+function Post({
+  name,
+  image,
+  contentText,
+  contentImg,
+}: {
+  name: string | undefined;
+  image: string;
+  contentText: string;
+  contentImg: string;
+}) {
   return (
     <Box maxW="md" p={2} borderWidth="1px" borderRadius="lg" overflow="hidden">
       <Flex p="4">
@@ -28,14 +36,12 @@ function Post() {
             borderRadius="full"
             objectFit="cover"
             src={image}
-            alt={user?.screenName}
+            alt={name}
           />
           <Box>
-            <Heading size="sm">{user?.screenName}</Heading>
-            <Text fontSize="sm">Creator, Chakra UI</Text>
+            <Heading size="sm">{name}</Heading>
           </Box>
         </Box>
-
         <IconButton
           variant="ghost"
           colorScheme="gray"
@@ -44,17 +50,13 @@ function Post() {
         />
       </Flex>
 
-      <Text p="4">
-        With Chakra UI, I wanted to sync the speed of development with the speed
-        of design. I wanted the developer to be just as excited as the designer
-        to create a screen.
-      </Text>
+      <Text p="4">{contentText}</Text>
 
-      <Image
-        objectFit="cover"
-        src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-        alt="Chakra UI"
-      />
+      {contentImg ? (
+        <Image objectFit="cover" src={contentImg} alt="Chakra UI" />
+      ) : (
+        <></>
+      )}
 
       <Flex justify="space-between" p="4">
         <Button flex="1" variant="ghost" leftIcon={<FiThumbsUp />}>
