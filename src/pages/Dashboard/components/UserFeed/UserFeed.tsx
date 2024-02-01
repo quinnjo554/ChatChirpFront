@@ -12,6 +12,7 @@ import {
   AlertDialogOverlay,
   Box,
   Button,
+  Flex,
   Input,
   InputGroup,
   InputLeftAddon,
@@ -35,14 +36,15 @@ function UserFeed() {
 
   return (
     <Box>
-      <PasswordAlert userDefault={user?.defaultProfile ?? true} />
-      <Post
-        name={user?.screenName}
-        contentText={"GET postdata"}
-        image={image}
-        contentImg=""
-      ></Post>
-      <p>password {user?.hashedPassword}</p>
+      <Flex flexDir="column">
+        <Post
+          name={user?.screenName}
+          contentText={user?.email ?? ""}
+          image={image}
+          contentImg=""
+        ></Post>
+        <p>password {user?.hashedPassword}</p>
+      </Flex>
     </Box>
   );
 }
