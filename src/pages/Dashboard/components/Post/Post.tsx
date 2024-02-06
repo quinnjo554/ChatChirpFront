@@ -12,8 +12,10 @@ import {
 import React from "react";
 import {
   FiCloud,
+  FiDribbble,
   FiMessageCircle,
   FiMoreVertical,
+  FiSlack,
   FiThumbsUp,
 } from "react-icons/fi";
 function Post({
@@ -21,11 +23,13 @@ function Post({
   image,
   contentText,
   contentImg,
+  points,
 }: {
   name: string | undefined;
   image: string;
   contentText: string;
   contentImg: string;
+  points: number;
 }) {
   return (
     <Box maxW="md" p={2} borderWidth="1px" borderRadius="lg" overflow="hidden">
@@ -65,8 +69,8 @@ function Post({
         <Button flex="1" variant="ghost" leftIcon={<FiMessageCircle />}>
           Comment
         </Button>
-        <Button flex="1" variant="ghost" leftIcon={<FiCloud />}>
-          Share
+        <Button flex="1" variant="ghost" leftIcon={<FiDribbble />}>
+          {points}
         </Button>
       </Flex>
     </Box>
