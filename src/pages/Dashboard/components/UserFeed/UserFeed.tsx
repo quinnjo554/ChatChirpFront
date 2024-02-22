@@ -2,11 +2,12 @@
 import { useGlobalContext } from "@/contexts/UserContext";
 import { useUserEmail } from "@/hooks/auth/getUser";
 import defaultUser from "@/utils/UserData/defaultUser";
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, Grid } from "@chakra-ui/react";
 import React, { useRef } from "react";
 import Post from "../Post/Post";
 import PasswordAlert from "@/components/Alert/PasswordAlert";
 import { getPostByUserId } from "@/hooks/Posts/PostHooks";
+import Banner from "./Banner";
 
 function UserFeed() {
   const { name, email, image } = useGlobalContext();
@@ -14,31 +15,44 @@ function UserFeed() {
   const dUser = defaultUser(name, email); //autoinit a user
   //pull from the cache and get a list of the users reco posts.
   const { data: user, isError } = useUserEmail(email, dUser);
+  const { data: posts, isError: postErr, refetch } = getPostByUserId(user?.id);
 
-  const { data: posts, isError: postErr } = getPostByUserId(user?.id);
+  const handlePostCreated = () => {
+    refetch();
+  };
   if (isError || postErr) {
     <Box>Display error page</Box>;
   }
-
   return (
-    <Box w="full" h="full">
-      <Flex flexDir="column">
-        {posts &&
-          posts.map((post, index) => {
-            return (
-              <Post
-                key={index}
-                name={user?.name}
-                image={user?.profileImageUrlHttps ?? image}
-                contentText={post.text}
-                points={post.points}
-                contentImg=""
-              ></Post>
-            );
-          })}
-        <p>password {user?.hashedPassword}</p>
-      </Flex>
-    </Box>
+    user && (
+      <Box w="full" h="full" p={6} overflowY="auto">
+        <Grid
+          templateColumns={{ base: "1fr", lg: "repeat(1, 1fr)" }}
+          gap={6}
+          maxW="5xl"
+          mx="auto"
+        >
+          <Banner user={user} onPostCreated={handlePostCreated}></Banner>
+          {posts &&
+            [...posts]
+              .reverse()
+              .map((post, index) => (
+                <Post
+                  key={index}
+                  name={user?.name}
+                  screenName={user?.screenName}
+                  likes={post.likeCount}
+                  image={user?.profileImageUrlHttps ?? image}
+                  contentText={post.text}
+                  points={post.points}
+                  contentImg={post?.contentLinkUrl ?? ""}
+                  videoUrl={post?.videoUrl ?? ""}
+                  createdAt={post?.createdAt}
+                />
+              ))}
+        </Grid>
+      </Box>
+    )
   );
 }
 

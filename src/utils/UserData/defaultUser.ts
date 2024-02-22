@@ -8,7 +8,7 @@ function createDefaultUser(name:string, email:string) {
         email: email,
         points: 0,
         screenName: email,
-        description: "This is my profile",
+        description: "Tell us and your followers about yourself here!",
         protected: false,
         verified: false,
         followersCount: 0,
@@ -18,8 +18,8 @@ function createDefaultUser(name:string, email:string) {
         statusesCount: 0,
         profileBannerUrl: "https://example.com/banner.jpg",
         profileImageUrlHttps: "https://example.com/profile.jpg",
-        defaultProfile: false,
-        defaultProfileImage: false,
+        defaultProfile: true,
+        defaultProfileImage: true,
         hashedPassword: crypto.randomUUID().toString()
     };
 }

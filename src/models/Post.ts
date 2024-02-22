@@ -2,7 +2,7 @@ interface Post {
     userId: string;
     id: string;
     text: string;
-    createdAt: Date;
+    createdAt: string;
     source: string;
     truncated: boolean;
     inReplyToStatusId?: number | null;
@@ -10,4 +10,6 @@ interface Post {
     inReplyToUserId?: number | null;
     likeCount: number;
     points: number;
+    contentLinkUrl:string | null;
+    videoUrl: string | null;
 }

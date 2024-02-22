@@ -1,5 +1,6 @@
+import { PostRequest } from "@/models/PostRequest";
 import { User } from "next-auth";
-import { UseQueryResult, useQuery } from "react-query";
+import { UseQueryResult, useMutation, useQuery } from "react-query";
 
  export function getPostByUserId(id: string | undefined): UseQueryResult<Post[], unknown> {
   return useQuery(['Post', id], async () => {
@@ -10,3 +11,17 @@ import { UseQueryResult, useQuery } from "react-query";
     enabled: !!id, // The query will not run until `id` is defined
   });
 }
+
+export const createPost = async (post: PostRequest) => {
+  const res = await fetch('http://localhost:8088/Post/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(post),
+  });
+  if (!res.ok) {
+    throw new Error('Network response was not ok');
+  }
+  return await res.json();
+};
