@@ -18,7 +18,7 @@ import React, { useRef, useEffect } from "react";
 function PasswordAlert({ userDefault }: { userDefault: boolean }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef(null);
-
+//for scope you can just remove password from the homepage
   useEffect(() => {
     if (userDefault) {
       onOpen();

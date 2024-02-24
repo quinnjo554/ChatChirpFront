@@ -1,74 +1,113 @@
+import PostPointsButton from "@/constants/PostPoints";
 import { useGlobalContext } from "@/contexts/UserContext";
 import { getUser } from "@/hooks/auth/getUser";
 import {
+  Avatar,
   Box,
   Button,
+  Center,
   Flex,
   Heading,
+  Icon,
   IconButton,
   Image,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Stack,
   Text,
 } from "@chakra-ui/react";
 import React from "react";
 import {
   FiCloud,
+  FiDribbble,
   FiMessageCircle,
   FiMoreVertical,
+  FiSmile,
+  FiMeh,
+  FiCalendar,
+  FiSlack,
   FiThumbsUp,
+  FiHeart,
+  FiMoreHorizontal,
 } from "react-icons/fi";
 function Post({
   name,
   image,
   contentText,
+  likes,
   contentImg,
+  points,
+  screenName,
+  videoUrl,
+  createdAt,
 }: {
   name: string | undefined;
   image: string;
   contentText: string;
   contentImg: string;
+  likes: number;
+  points: number;
+  screenName: string | undefined;
+  videoUrl: string | null;
+  createdAt: string;
 }) {
+  const date = Date.parse(createdAt);
+  const postDate = new Date(date);
   return (
-    <Box maxW="md" p={2} borderWidth="1px" borderRadius="lg" overflow="hidden">
-      <Flex p="4">
-        <Box flex={"2"} gap="4" alignItems="center" flexWrap="wrap">
-          <Image
-            boxSize="60px"
-            borderRadius="full"
-            objectFit="cover"
-            src={image}
-            alt={name}
-          />
-          <Box>
-            <Heading size="sm">{name}</Heading>
-          </Box>
+    <Box p={6} borderWidth="1px" borderRadius="lg" overflow="hidden">
+      <Flex p="2">
+        <Avatar size="lg" src={image} name={name} />
+        <Box flex="1" ml="4">
+          <Stack>
+            <Flex>
+              <Heading mr={1} size="md">
+                {name}
+              </Heading>
+              <Text fontSize="md">@{screenName}</Text>
+            </Flex>
+            <Flex>
+              <Text fontSize="sm">{postDate.toDateString()}</Text>
+            </Flex>
+          </Stack>
         </Box>
-        <IconButton
-          variant="ghost"
-          colorScheme="gray"
-          aria-label="See menu"
-          icon={<FiMoreVertical />}
+        <Menu>
+          <MenuButton
+            as={IconButton}
+            variant="outline"
+            aria-label="Options"
+            icon={<FiMoreHorizontal />}
+          />
+          <MenuList>
+            <MenuItem>Block</MenuItem>
+            <MenuItem>Report</MenuItem>
+          </MenuList>
+        </Menu>
+      </Flex>
+
+      <Text p={4}>{contentText}</Text>
+      {contentImg && (
+        <Image
+          p={4}
+          objectFit="contain"
+          width="full"
+          height="auto"
+          src={contentImg}
+          alt="Chat Chirp Img"
         />
-      </Flex>
-
-      <Text p="4">{contentText}</Text>
-
-      {contentImg ? (
-        <Image objectFit="cover" src={contentImg} alt="Chakra UI" />
-      ) : (
-        <></>
       )}
-
-      <Flex justify="space-between" p="4">
-        <Button flex="1" variant="ghost" leftIcon={<FiThumbsUp />}>
-          Like
+      {videoUrl && (
+        <Box p={4}>
+          <iframe width={"400"} height={"400"} src={videoUrl}></iframe>
+        </Box>
+      )}
+      <Center>
+        <Button rightIcon={<FiHeart />} variant="ghost">
+          {likes} Likes
         </Button>
-        <Button flex="1" variant="ghost" leftIcon={<FiMessageCircle />}>
-          Comment
-        </Button>
-        <Button flex="1" variant="ghost" leftIcon={<FiCloud />}>
-          Share
-        </Button>
-      </Flex>
+        <PostPointsButton points={points}></PostPointsButton>
+      </Center>
     </Box>
   );
 }
