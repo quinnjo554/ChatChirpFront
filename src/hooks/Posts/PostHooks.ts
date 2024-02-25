@@ -25,3 +25,15 @@ export const createPost = async (post: PostRequest) => {
   }
   return await res.json();
 };
+
+export const deletePost = async (postId:string) =>{
+  const res = await fetch(`http://localhost:8088/Post/delete/${postId}`,{
+    method: 'DELETE'
+  });
+  //try and throw the error produced from here.
+  if(!res.ok){
+    throw new Error('Delete Failed');
+  }
+  return await res.json();
+
+}

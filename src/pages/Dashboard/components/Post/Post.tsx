@@ -1,5 +1,6 @@
 import PostPointsButton from "@/constants/PostPoints";
 import { useGlobalContext } from "@/contexts/UserContext";
+import { deletePost } from "@/hooks/Posts/PostHooks";
 import { getUser } from "@/hooks/auth/getUser";
 import {
   Avatar,
@@ -32,7 +33,9 @@ import {
   FiHeart,
   FiMoreHorizontal,
 } from "react-icons/fi";
+import { useMutation } from "react-query";
 function Post({
+  id,
   name,
   image,
   contentText,
@@ -42,7 +45,9 @@ function Post({
   screenName,
   videoUrl,
   createdAt,
+  onPostDeleted,
 }: {
+  id: string;
   name: string | undefined;
   image: string;
   contentText: string;
@@ -52,9 +57,19 @@ function Post({
   screenName: string | undefined;
   videoUrl: string | null;
   createdAt: string;
+  onPostDeleted: () => void;
 }) {
   const date = Date.parse(createdAt);
   const postDate = new Date(date);
+  const mutation = useMutation(deletePost);
+
+  const handleSubmit = () => {
+    mutation.mutate(id, {
+      onSuccess: () => {
+        onPostDeleted(); 
+      },
+    });
+  };
   return (
     <Box p={6} borderWidth="1px" borderRadius="lg" overflow="hidden">
       <Flex p="2">
@@ -80,8 +95,7 @@ function Post({
             icon={<FiMoreHorizontal />}
           />
           <MenuList>
-            <MenuItem>Block</MenuItem>
-            <MenuItem>Report</MenuItem>
+            <MenuItem onClick={handleSubmit}>Delete</MenuItem>
           </MenuList>
         </Menu>
       </Flex>
