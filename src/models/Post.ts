@@ -1,6 +1,6 @@
 interface Post {
-    userId: string;
     id: string;
+    userId: string;
     text: string;
     createdAt: string;
     source: string;

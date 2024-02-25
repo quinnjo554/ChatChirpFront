@@ -23,6 +23,7 @@ function UserFeed() {
   if (isError || postErr) {
     <Box>Display error page</Box>;
   }
+  console.log(posts); //why is the postId being saved as the userId?
   return (
     user && (
       <Box w="full" h="full" p={6} overflowY="auto">
@@ -39,6 +40,7 @@ function UserFeed() {
               .map((post, index) => (
                 <Post
                   key={index}
+                  id={post.userId}
                   name={user?.name}
                   screenName={user?.screenName}
                   likes={post.likeCount}
@@ -48,6 +50,7 @@ function UserFeed() {
                   contentImg={post?.contentLinkUrl ?? ""}
                   videoUrl={post?.videoUrl ?? ""}
                   createdAt={post?.createdAt}
+                  onPostDeleted={handlePostCreated}
                 />
               ))}
         </Grid>
