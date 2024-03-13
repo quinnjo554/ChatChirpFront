@@ -1,7 +1,5 @@
 import PostPointsButton from "@/constants/PostPoints";
-import { useGlobalContext } from "@/contexts/UserContext";
 import { deletePost } from "@/hooks/Posts/PostHooks";
-import { getUser } from "@/hooks/auth/getUser";
 import {
   Avatar,
   Box,
@@ -21,15 +19,6 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import {
-  FiCloud,
-  FiDribbble,
-  FiMessageCircle,
-  FiMoreVertical,
-  FiSmile,
-  FiMeh,
-  FiCalendar,
-  FiSlack,
-  FiThumbsUp,
   FiHeart,
   FiMoreHorizontal,
 } from "react-icons/fi";
@@ -45,6 +34,7 @@ function Post({
   screenName,
   videoUrl,
   createdAt,
+  isUserPost,
   onPostDeleted,
 }: {
   id: string;
@@ -57,6 +47,7 @@ function Post({
   screenName: string | undefined;
   videoUrl: string | null;
   createdAt: string;
+  isUserPost: boolean;
   onPostDeleted: () => void;
 }) {
   const date = Date.parse(createdAt);
@@ -66,10 +57,13 @@ function Post({
   const handleSubmit = () => {
     mutation.mutate(id, {
       onSuccess: () => {
-        onPostDeleted(); 
+        onPostDeleted();
       },
     });
   };
+
+  const menuItems = isUserPost ? <MenuList><MenuItem onClick={handleSubmit}>Delete</MenuItem></MenuList> : <MenuList><MenuItem>Report</MenuItem></MenuList>;
+
   return (
     <Box p={6} borderWidth="1px" borderRadius="lg" overflow="hidden">
       <Flex p="2">
@@ -94,9 +88,7 @@ function Post({
             aria-label="Options"
             icon={<FiMoreHorizontal />}
           />
-          <MenuList>
-            <MenuItem onClick={handleSubmit}>Delete</MenuItem>
-          </MenuList>
+          {menuItems}
         </Menu>
       </Flex>
 

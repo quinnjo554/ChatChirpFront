@@ -20,6 +20,7 @@ function UserFeed() {
   const handlePostCreated = () => {
     refetch();
   };
+
   if (isError || postErr) {
     <Box>Display error page</Box>;
   }
@@ -51,6 +52,7 @@ function UserFeed() {
                   videoUrl={post?.videoUrl ?? ""}
                   createdAt={post?.createdAt}
                   onPostDeleted={handlePostCreated}
+                  isUserPost={true}
                 />
               ))}
         </Grid>

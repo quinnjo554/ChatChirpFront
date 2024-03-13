@@ -5,19 +5,12 @@ import {
   Avatar,
   Heading,
   Text,
-  Image,
   Stack,
-  Link,
   Button,
   useDisclosure,
 } from "@chakra-ui/react";
 import User from "@/models/User";
 import CreatePost from "@/forms/CreatePost/CreatePost";
-import {
-  RefetchOptions,
-  RefetchQueryFilters,
-  QueryObserverResult,
-} from "react-query";
 
 interface BannerProps {
   user: User;
